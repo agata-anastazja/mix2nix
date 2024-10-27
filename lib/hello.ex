@@ -13,6 +13,6 @@ defmodule Hello do
 
   """
   def hello do
-    :world
+    IO.inspect("hello")
   end
 end

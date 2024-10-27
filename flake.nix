@@ -21,7 +21,7 @@
       packages = let
         version = "0.1.0";
         src = ./.;
-        mixFodDeps = with pkgs; import ./mix_deps.nix {inherit lib beamPackages};
+        mixNixDeps = with pkgs; import ./mix_deps.nix {inherit lib beamPackages; };
         translatedPlatform =
           {
             aarch64-darwin = "macos-arm64";
@@ -34,11 +34,11 @@
 
       in rec {
        default = erlangPackages.mixRelease {
-          inherit version src mixFodDeps;
+          inherit version src mixNixDeps;
           pname = "ravensiris-web";
 
           preInstall = ''
-            ${elixir}/bin/mix release
+            ${elixir}/bin/mix release --no-deps-check
           ''; 
         };
 
